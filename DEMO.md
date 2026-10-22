@@ -46,10 +46,11 @@ python3 dist/splitshare.pyz examples/weekend.json
 - [x] Приглашение MrDeryf отправлено; ожидается принятие.
 - [x] Опубликована Wiki, диаграмма Ганта отрисовывается.
 - [x] Созданы 10 Issues и Project; интерфейс доски сообщает об ошибке загрузки.
-- [ ] Задача, PR и реальные переходы состояний.
+- [x] SS-08: Backlog → In progress → In review; открыт PR #11.
+- [ ] Независимое review и merge PR участником.
 - [x] Квартальная диаграмма с зависимостями.
 - [x] Runner `splitshare-mac-arm64` подключён и выполнил задание.
-- [x] Run https://github.com/eductionnn-netizen/splitshare/actions/runs/39808522101 — success.
+- [x] Задание в run https://github.com/eductionnn-netizen/splitshare/actions/runs/39808522101 — success; общий run пока in_progress.
 - [x] Собранное приложение выполнено на Mac, `SMOKE PASSED`.
 
 Пока внешние шаги не выполнены, нельзя говорить, что все четыре блока полностью сданы.
