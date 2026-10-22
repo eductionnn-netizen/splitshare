@@ -12,7 +12,7 @@ Wiki опубликована отдельно: https://github.com/eductionnn-ne
 
 ## 2. Доска — 2 минуты
 
-Показать 10 Issues из `planning/Backlog.md`, поля Team/Sprint/Estimate и колонки
+Показать 10 Issues из `planning/Backlog.md`, команду, спринт и оценку в описании задач и колонки
 Backlog, Ready, In Progress, Review, Done. Открыть одну задачу с критериями приёмки,
 зависимостью и связанным PR. Показать реальный переход после успешной проверки.
 
@@ -50,7 +50,7 @@ python3 dist/splitshare.pyz examples/weekend.json
 - [ ] Независимое review и merge PR участником.
 - [x] Квартальная диаграмма с зависимостями.
 - [x] Runner `splitshare-mac-arm64` подключён и выполнил задание.
-- [x] Задание в run https://github.com/eductionnn-netizen/splitshare/actions/runs/39808522101 — success; общий run пока in_progress.
+- [x] Задание в run https://github.com/eductionnn-netizen/splitshare/actions/runs/39808522101 — completed / success.
 - [x] Собранное приложение выполнено на Mac, `SMOKE PASSED`.
 
 Пока внешние шаги не выполнены, нельзя говорить, что все четыре блока полностью сданы.

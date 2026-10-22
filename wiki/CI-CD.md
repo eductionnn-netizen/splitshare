@@ -53,8 +53,7 @@ python3 scripts/smoke.py
 GitHub рекомендует self-hosted runner для приватных репозиториев. При этом wiki
 приватного репозитория требует соответствующего платного плана. Если доступен
 только GitHub Free, можно отдельно разместить публичную учебную wiki, оставив
-исполняемый код и runner в приватном репозитории. Это выбор перед публикацией;
-внешние репозитории пока не созданы.
+исполняемый код и runner в приватном репозитории. Код опубликован в приватном eductionnn-netizen/splitshare, Wiki — в публичном splitshare-docs.
 
 Workflow не подписан на pull request из внешних fork. Доступ к изменению кода
 и ручному запуску выдаётся только согласованным участникам учебного проекта.
@@ -71,3 +70,9 @@ Workflow не подписан на pull request из внешних fork. До�
 - [Добавление self-hosted runner](https://docs.github.com/en/actions/how-tos/manage-runners/self-hosted-runners/add-runners)
 - [Доступность wiki](https://docs.github.com/en/communities/documenting-your-project-with-wikis/about-wikis)
 - [Синтаксис workflow](https://docs.github.com/en/actions/reference/workflows-and-actions/workflow-syntax)
+
+## Фактический результат 22.10.2026
+
+[Workflow](https://github.com/eductionnn-netizen/splitshare/actions/runs/39808522101) завершён со статусом **completed / success** на локальном Mac, runner `splitshare-mac-arm64`.
+Commit: `5aa01ac0b10431cd1bb3c78d21b54a300f51ad26`.
+Все 15 тестов пройдены; архив `splitshare.pyz` собран и выполнен, результат `SMOKE PASSED`. Артефакт `splitshare-app` опубликован в Actions. Постоянный автозапуск runner не установлен.

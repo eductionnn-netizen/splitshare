@@ -21,8 +21,7 @@
 
 [Задание test-build-run](https://github.com/eductionnn-netizen/splitshare/actions/runs/39808522101/job/119928174091)
 успешно выполнилось 22.10.2026 на `splitshare-mac-arm64` (Apple Silicon, Python 3.9.6).
-GitHub подтверждает `completed / success` для задания. Общий workflow run пока
-показывает `in_progress` с пустым conclusion; полное завершение run не подтверждено.
+GitHub подтверждает `completed / success` для задания и всего workflow run.
 Commit: `5aa01ac0b10431cd1bb3c78d21b54a300f51ad26`.
 
 Все шаги успешны: 15 тестов, сборка zipapp, запуск собранного приложения и публикация
@@ -39,3 +38,5 @@ Commit: `5aa01ac0b10431cd1bb3c78d21b54a300f51ad26`.
 Запуск содержит предупреждение о Node.js 20 в `actions/checkout@v4` и
 `actions/upload-artifact@v4`: GitHub исполнил их на Node.js 24, итог задания — success.
 Будущий веб-продукт из квартального плана ещё не реализован.
+
+У всех 10 задач сохранены Start date и Target date на январь–март 2027. Roadmap view 4 возвращает ошибку загрузки; отображение полос не подтверждено.
