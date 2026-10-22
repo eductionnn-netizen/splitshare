@@ -61,15 +61,36 @@ def calculate(data):
             "balances_kopecks": balances, "transfers": transfers}
 
 
+def format_report(result):
+    def rubles(amount):
+        whole, cents = divmod(abs(amount), 100)
+        return "{}.{:02d} ₽".format(whole, cents)
+
+    lines = ["SplitShare — расчёт расходов", "", "Балансы:"]
+    for name, amount in result["balances_kopecks"].items():
+        status = "получит" if amount > 0 else "вернёт" if amount < 0 else "рассчитался"
+        lines.append("{}: {} {}".format(name, status, rubles(amount)))
+    lines.extend(["", "Предлагаемые переводы:"])
+    for transfer in result["transfers"]:
+        lines.append("{} → {}: {}".format(transfer["from"], transfer["to"],
+                                          rubles(transfer["amount_kopecks"])))
+    if not result["transfers"]:
+        lines.append("Все рассчитались — переводов нет.")
+    return "\n".join(lines)
+
+
 def main():
     parser = argparse.ArgumentParser(description="SplitShare — разделить расходы друзей")
     parser.add_argument("input", type=Path, help="JSON-файл группы и расходов")
+    parser.add_argument("--format", choices=("json", "text"), default="json",
+                        help="Формат результата: json или понятный отчёт text")
     args = parser.parse_args()
     try:
         result = calculate(json.loads(args.input.read_text(encoding="utf-8")))
     except (OSError, UnicodeError, ValueError) as error:
         parser.exit(2, "Ошибка: {}\n".format(error))
-    print(json.dumps(result, ensure_ascii=False, indent=2))
+    print(format_report(result) if args.format == "text"
+          else json.dumps(result, ensure_ascii=False, indent=2))
 
 
 if __name__ == "__main__":

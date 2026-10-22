@@ -7,7 +7,7 @@ import sys
 import tempfile
 import unittest
 
-from app.splitshare import calculate
+from app.splitshare import calculate, format_report
 
 
 class SplitShareTests(unittest.TestCase):
@@ -117,6 +117,26 @@ class SplitShareTests(unittest.TestCase):
         self.assertEqual(result.returncode, 2)
         self.assertIn("Ошибка:", result.stderr)
         self.assertNotIn("Traceback", result.stderr)
+
+    def test_text_report_cli(self):
+        root = Path(__file__).resolve().parents[1]
+        result = subprocess.run([sys.executable, str(root / "app/splitshare.py"),
+                                 str(root / "examples/weekend.json"), "--format", "text"],
+                                capture_output=True, text=True)
+        self.assertEqual(result.returncode, 0)
+        self.assertIn("Аня: получит 1700.00 ₽", result.stdout)
+        self.assertIn("Вика → Аня: 1300.00 ₽", result.stdout)
+        self.assertIn("Борис → Аня: 400.00 ₽", result.stdout)
+
+    def test_text_report_preserves_small_and_large_amounts(self):
+        amount = 10 ** 20 + 1
+        result = calculate({"members": ["Аня", "Борис"], "expenses": [
+            {"payer": "Аня", "amount_kopecks": amount, "participants": ["Борис"]}]})
+        self.assertIn("Борис → Аня: 1000000000000000000.01 ₽", format_report(result))
+
+    def test_text_report_when_settled(self):
+        self.data["expenses"] = []
+        self.assertIn("Все рассчитались — переводов нет.", format_report(calculate(self.data)))
 
 
 if __name__ == "__main__":
