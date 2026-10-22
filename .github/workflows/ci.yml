@@ -1,0 +1,38 @@
+name: SplitShare local CI
+
+on:
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+concurrency:
+  group: splitshare-local-ci
+  cancel-in-progress: false
+
+jobs:
+  test-build-run:
+    if: github.ref == 'refs/heads/main'
+    runs-on: [self-hosted, splitshare]
+    timeout-minutes: 10
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+        with:
+          persist-credentials: false
+      - name: Runner identity and Python
+        run: |
+          hostname
+          python3 --version
+      - name: Tests
+        run: python3 -m unittest discover -s tests -v
+      - name: Build executable archive
+        run: python3 scripts/build.py
+      - name: Run and verify built application
+        run: python3 scripts/smoke.py
+      - name: Publish executable archive
+        uses: actions/upload-artifact@v4
+        with:
+          name: splitshare-app
+          path: dist/splitshare.pyz
+          if-no-files-found: error

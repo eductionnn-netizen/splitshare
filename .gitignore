@@ -1,0 +1,7 @@
+__pycache__/
+*.pyc
+dist/
+.build/
+.env
+.DS_Store
+actions-runner/

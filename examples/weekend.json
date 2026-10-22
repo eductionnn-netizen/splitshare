@@ -1,0 +1,7 @@
+{
+  "members": ["Аня", "Борис", "Вика"],
+  "expenses": [
+    {"title": "Ужин", "payer": "Аня", "amount_kopecks": 300000, "participants": ["Аня", "Борис", "Вика"]},
+    {"title": "Такси", "payer": "Борис", "amount_kopecks": 90000, "participants": ["Аня", "Борис", "Вика"]}
+  ]
+}
