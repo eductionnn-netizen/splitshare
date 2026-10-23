@@ -21,6 +21,7 @@ python3 dist/splitshare.pyz examples/weekend.json --format text
 - [Wiki](https://github.com/eductionnn-netizen/splitshare/wiki)
 - [Задачи](https://github.com/eductionnn-netizen/splitshare/issues)
 - [Доска](https://github.com/users/eductionnn-netizen/projects/1/views/1)
+- [Задачи и подзадачи](https://github.com/users/eductionnn-netizen/projects/1/views/6)
 - [Roadmap](https://github.com/users/eductionnn-netizen/projects/1/views/4)
 - [Квартальный план и зависимости](https://github.com/eductionnn-netizen/splitshare/wiki/Quarter%E2%80%90plan)
 - [Организация CI](ci/README.md)
