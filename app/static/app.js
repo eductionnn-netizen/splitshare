@@ -20,7 +20,7 @@ async function formAction(form, action) {
 }
 function renderGroups() {
  const list=$('group-list');list.replaceChildren();
- for(const item of groups){const b=node('button','group-button'+(group?.id===item.id?' active':''));b.type='button';b.append(node('span','group-symbol','◈'),node('span','',item.name));b.setAttribute('aria-pressed',String(group?.id===item.id));b.addEventListener('click',()=>selectGroup(item.id));list.append(b);}
+ for(const item of groups){const b=node('button','group-button'+(group?.id===item.id?' active':''));b.type='button';b.append(node('span','',item.name));b.setAttribute('aria-pressed',String(group?.id===item.id));b.addEventListener('click',()=>selectGroup(item.id));list.append(b);}
 }
 async function selectGroup(id) {
  const version=++selectionVersion;
@@ -37,20 +37,20 @@ function render() {
  $('last-expense').textContent=sorted.length?'Последний расход — '+dateLabel(sorted[0].date):'Пока нет расходов';
  const transfers=group.result.transfers;
  $('debt-total').textContent=money(transfers.reduce((sum,t)=>sum+t.amount_kopecks,0));
- $('transfer-count').textContent=transfers.length?transfers.length+' '+plural(transfers.length,['перевод между участниками','перевода между участниками','переводов между участниками']):'Все рассчитались';
+ $('transfer-count').textContent=transfers.length?transfers.length+' '+plural(transfers.length,['перевод между участниками','перевода между участниками','переводов между участниками']):'Нет задолженности';
  const expenses=$('expenses');expenses.replaceChildren();
- if(!sorted.length){const empty=node('div','empty');empty.append(node('strong','','Расходов пока нет'),node('span','','Добавьте первый расход — мы разделим его между участниками.'));expenses.append(empty);}
+ if(!sorted.length){const empty=node('div','empty');empty.append(node('strong','','Расходов пока нет'),node('span','','Нажмите «Добавить расход», чтобы записать покупку.'));expenses.append(empty);}
  for(const e of sorted){
   const row=node('article','expense-row'),info=node('div','expense-info'),amount=node('div','expense-money',money(e.amount_kopecks));
-  info.append(node('div','expense-title',e.title),node('div','expense-subtitle',dateLabel(e.date)+' · Оплатил(а) '+e.payer));
+  info.append(node('div','expense-title',e.title),node('div','expense-subtitle',dateLabel(e.date)+' · Оплата: '+e.payer));
   amount.append(node('small','',e.participants.length+' '+plural(e.participants.length,['участник','участника','участников'])));
   const remove=node('button','delete-expense','×');remove.setAttribute('aria-label','Удалить расход «'+e.title+'»');remove.addEventListener('click',()=>{deleting=e;$('delete-description').textContent='«'+e.title+'» · '+money(e.amount_kopecks);openDialog('delete-dialog');});
-  row.append(node('span','expense-icon','↗'),info,amount,remove);expenses.append(row);
+  row.append(info,amount,remove);expenses.append(row);
  }
  const balances=$('balances');balances.replaceChildren();
- for(const name of group.members){const balance=group.result.balances_kopecks[name],row=node('div','balance-row'),info=node('div','balance-name',name),result=node('div','balance-result'+(balance<0?' negative':''),money(Math.abs(balance)));info.append(node('small','','Оплачено '+money(group.result.paid_kopecks[name])+' · Доля '+money(group.result.shares_kopecks[name])));result.append(node('small','',balance>0?'получит':balance<0?'вернёт':'рассчитался'));row.append(avatar(name),info,result);balances.append(row);}
+ for(const name of group.members){const balance=group.result.balances_kopecks[name],row=node('div','balance-row'),info=node('div','balance-name',name),result=node('div','balance-result'+(balance<0?' negative':''),money(Math.abs(balance)));info.append(node('small','','Оплачено '+money(group.result.paid_kopecks[name])+' · Доля '+money(group.result.shares_kopecks[name])));result.append(node('small','',balance>0?'получит':balance<0?'вернёт':'ничего не должен'));row.append(avatar(name),info,result);balances.append(row);}
  const list=$('transfers');list.replaceChildren();
- if(!transfers.length){const empty=node('div','empty');empty.append(node('strong','','Все рассчитались'),node('span','','Переводы не нужны'));list.append(empty);}
+ if(!transfers.length){const empty=node('div','empty');empty.append(node('strong','','Нет задолженности'),node('span','','Переводы не нужны'));list.append(empty);}
  for(const t of transfers){const row=node('div','transfer'),people=node('div','transfer-person');people.append(avatar(t.from),node('span','',t.from),node('span','transfer-arrow','→'),node('span','',t.to));row.append(people,node('strong','',money(t.amount_kopecks)));list.append(row);}
 }
 function plural(n, forms){return forms[n%10===1&&n%100!==11?0:n%10>=2&&n%10<=4&&(n%100<12||n%100>14)?1:2];}
