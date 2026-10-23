@@ -7,9 +7,9 @@ flowchart LR
     Copy --> Private[Приватный splitshare-ci и SOURCE.json]
     Private --> Manual[Ручной запуск на main]
     Manual --> Runner[Mac splitshare-private-mac]
-    Runner --> Tests[18 тестов]
-    Tests --> Build[Сборка splitshare.pyz]
-    Build --> Smoke[Запуск JSON и текстового отчёта]
+    Runner --> Tests[27 тестов]
+    Tests --> Build[Сборка CLI и веб-приложения]
+    Build --> Smoke[Запуск CLI, интерфейса и API]
     Smoke --> Artifact[Артефакт splitshare-app]
 ```
 
@@ -23,13 +23,13 @@ flowchart LR
 python3 -m unittest discover -s tests -v
 python3 scripts/build.py
 python3 scripts/smoke.py
-python3 dist/splitshare.pyz examples/weekend.json --format text
+python3 dist/splitshare-web.pyz --port 8787 --open
 ```
 
-Проверяются расчёт балансов, распределение остаточных копеек, неверные входные данные, CLI, текстовый отчёт и исполнение собранного архива. Результат примера: Вика → Аня 1300.00 ₽; Борис → Аня 400.00 ₽.
+Проверяются расчёт балансов, распределение остаточных копеек, неверные входные данные, CLI, текстовый отчёт, API, SQLite и запуск собранных архивов. Результат примера: Вика → Аня 1300.00 ₽; Борис → Аня 400.00 ₽.
 
 ## Обновление и запуск
 
 [Процедура обновления приватной копии](https://github.com/eductionnn-netizen/splitshare/blob/main/ci/README.md). Владелец открывает Actions приватного репозитория, выбирает SplitShare private local CI и запускает Run workflow на main. После работы runner останавливается. Логи приватного CI доступны только его участникам.
 
-CI запускает тесты и собирает исполняемый архив приложения. Постоянное развёртывание веб-сервиса пока не реализовано.
+CI запускает тесты и собирает `splitshare.pyz` и `splitshare-web.pyz`. Постоянное развёртывание веб-сервиса пока не реализовано.
